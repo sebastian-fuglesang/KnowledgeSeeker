@@ -1,0 +1,15 @@
+body,
+.root,
+#page-container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#page-content {
+    flex: 1;
+}
