@@ -1,14 +1,12 @@
 
 import KsRegister from "../components/register/KsRegister";
-import { Container } from "trunx";
+import "./RegisterPage.scss";
 
 
-export default function RegisterPage(){
 
-    return(
-        <Container>
-            <KsRegister />
-        </Container>
+export default function RegisterPage() {
+
+    return (
+        <KsRegister />
     )
-
 }

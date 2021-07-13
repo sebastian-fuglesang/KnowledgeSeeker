@@ -1,23 +1,52 @@
-import KsInputField from "../form/inputfield/KsInputField";
-import KsButton from "../button/KsButton";
-import { Container } from "trunx";
+import { useForm } from 'react-hook-form';
+import { useAuth } from "../../components/contexts/AuthContex";
+import { Link, useHistory } from 'react-router-dom';
+import { Columns, Column, Label, Button } from 'trunx';
 
+interface LoginProps {
+    email: string;
+    password: string;
+}
 
+export default function KsLogin() {
 
-
-export default function KsLogin(){
-
-    function handleClick(){
-        console.log("stuff");
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginProps>();
+    const { loginUser }: { loginUser(email: string, password: string): void } = useAuth()
+    const history = useHistory();
+    const onSubmit = (e: any) => {
+        {/*e.preventDefault(); kræsjer og sier at preventDefault ikke er en funksjon*/ }
+        loginUser(e.email, e.password);
+        history.push("/Dashboard")
     }
 
     return (
-        <Container>
-            <KsInputField type="text" labelText="BrukerNavn" />
-            <KsInputField type="text" labelText="Passord" />
-            <KsButton onClickFunction={handleClick} buttonText="Logg Inn"/>
-            <a>Har du ikke en bruker?</a>
-        </Container>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Columns isFlex isFlexDirectionColumn hasBackgroundInfo isAlignItemsCenter isJustifyContentCenter p6>
+                <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
+                    <Label>Email</Label>
+                    <input type="text" placeholder="email" {...register("email", { required: "An email is required.", })} />
+                    {errors.email && <p>{errors.email.message}</p>}
+                </Column>
+
+                <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
+                    <Label>Passord</Label>
+                    <input type="text" placeholder="password" {...register("password", { required: "A password is required.", })} />
+                    {errors.email && <p>{errors.email.message}</p>}
+                </Column>
+
+                <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
+                    <Button type="submit" isLink isNormal>Login</Button>
+                </Column>
+
+                <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
+                    <div>
+                        Don't have an account? <Link to="/RegisterPage">Register User</Link>
+                    </div>
+                </Column>
+
+            </Columns >
+        </form>
+
+
     )
 }
-

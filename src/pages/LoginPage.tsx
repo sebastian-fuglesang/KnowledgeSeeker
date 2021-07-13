@@ -1,15 +1,12 @@
-import { Container } from "trunx"
-import KsLogin from "../components/login/KsLogin"
+import KsLogin from "../components/login/KsLogin";
+import "./LoginPage.scss";
 
 
-export default function LoginPage(){
+export default function LoginPage() {
 
 
     return (
-        <Container>
-                <KsLogin />
-        </Container>
+        <KsLogin />
     )
 }
 
-                
