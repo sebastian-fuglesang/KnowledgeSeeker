@@ -1,40 +1,40 @@
-import { Navbar } from "trunx"
-import { Button } from 'trunx'
+import { Navbar, Button } from "trunx";
+import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
 
-const KsNavbar = () => {
+export default function KsNavbar() {
     return (
         <Navbar>
-            {/* hvordan løse dette bedre med trunx? Må jeg bruke className her? Kan bare importere NavbarItemProps men ikke NavbarItem */}
-            <div className="navbar-menu">
-                
-                <div className="navbar-start">
-                    <div className="navbar-item">
-                        <a>KnowledeSeeker</a>
-                    </div>
-                </div>
+            <Navbar.Menu>
+                <Navbar.Start>
+                    <Navbar.Item>
+                        <Link to="/">KnowledgeSeeker</Link>
+                    </Navbar.Item>
+                </Navbar.Start>
 
-                <div className="navbar-end">
+                <Navbar.End>
+                    <Navbar.Item>
+                        <Link to="/">Om oss</Link>
+                    </Navbar.Item>
 
-                    <div className="navbar-item">
-                        <a>Om oss</a>
-                    </div>
+                    <Navbar.Item>
+                        <Link to="/">Finn internship</Link>
+                    </Navbar.Item>
 
-                    <div className="navbar-item">
-                        <a>Finn Internship</a>
-                    </div>
+                    <Navbar.Item>
+                        <Link to="/">Finn bedrifter</Link>
+                    </Navbar.Item>
 
-                    <div className="navbar-item">
-                        <a>Finn bedrifter</a>
-                    </div>
+                    <Link to="/RegisterUserTypePage">
+                        <Button isLink m2>Registrer deg</Button>
+                    </Link>
 
-                    <Button isLink m2>Registrer deg</Button>
-                    <Button isLink m2>Logg Inn</Button>
+                    <Link to="/LoginPage">
+                        <Button isLink m2>Logg inn</Button>
+                    </Link>
 
-                </div>
-
-            </div>
+                </Navbar.End>
+            </Navbar.Menu>
         </Navbar>
     )
 }
-
-export default KsNavbar
