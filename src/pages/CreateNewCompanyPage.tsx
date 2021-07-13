@@ -1,4 +1,4 @@
-import { Container, Hero, Label } from "trunx";
+import { Button, Hero, Label, Columns, Column } from "trunx";
 import { useForm } from 'react-hook-form';
 import { companiesDB } from "../utils/firebase";
 
@@ -26,28 +26,41 @@ export default function CreateNewCompanyPage() {
     }
 
     return (
-        <Container>
-            <Hero isSize4 hasBackgroundLink hasTextWhite hasTextCentered m6>Opprett Ny Bedrift</Hero>
+        <Columns isFlex isFlexDirectionColumn isAlignItemsCenter isJustifyContentCenter>
+
+            <Column>
+                <Hero isSize4 hasBackgroundInfo hasTextWhite hasTextCentered m6 pl6 pr6 pb2 pt2>Opprett Ny Bedrift</Hero>
+            </Column>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Label>Bedriftens navn</Label>
-                <input type="text" placeholder="Bedriftens navn" {...register("companyName", { required: "A company name is required" })} />
-                {errors.companyName && errors.companyName.message}
 
-                <Label>Beskrivelse</Label>
-                <input type="text" placeholder="Beskrivelse" {...register("description", { required: "A description is required" })} />
-                {errors.description && errors.description.message}
+                <Column>
+                    <Label hasTextInfo>Bedriftens navn</Label>
+                    <input type="text" placeholder="Bedriftens navn" {...register("companyName", { required: "A company name is required" })} />
+                    {errors.companyName && errors.companyName.message}
+                </Column>
 
-                <Label>Antall Ansatte</Label>
-                <input type="number" placeholder="Antall ansatte" {...register("numberOfEmployees")} />
+                <Column>
+                    <Label hasTextInfo>Beskrivelse</Label>
+                    <textarea style={{ maxWidth: 200 }} placeholder="Beskrivelse" {...register("description", { required: "A description is required" })} />
+                    {errors.description && errors.description.message}
+                </Column>
 
-                <Label>Bedriftens Bransje</Label>
-                <select {...register("industry")}>
-                    <option>{industries.alltech}</option>
-                    <option>{industries.fintech}</option>
-                </select>
+                <Column>
+                    <Label hasTextInfo>Antall Ansatte</Label>
+                    <input type="number" placeholder="Antall ansatte" {...register("numberOfEmployees")} />
+                </Column>
 
-                <button type="submit">Opprett Bedrift</button>
+                <Column>
+                    <Label hasTextInfo>Bedriftens Bransje</Label>
+                    <select {...register("industry")}>
+                        <option>{industries.alltech}</option>
+                        <option>{industries.fintech}</option>
+                    </select>
+                </Column>
 
+                <Column>
+                    <Button isMedium isInfo type="submit">Opprett Bedrift</Button>
+                </Column>
             </form>
-        </Container >)
+        </Columns >)
 }

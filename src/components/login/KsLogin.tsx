@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from "../../components/contexts/AuthContex";
 import { Link, useHistory } from 'react-router-dom';
-import { Columns, Column, Label, Button } from 'trunx';
+import { Columns, Column, Label, Button, Input } from 'trunx';
 
 interface LoginProps {
     email: string;
@@ -24,13 +24,13 @@ export default function KsLogin() {
             <Columns isFlex isFlexDirectionColumn hasBackgroundInfo isAlignItemsCenter isJustifyContentCenter p6>
                 <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
                     <Label>Email</Label>
-                    <input type="text" placeholder="email" {...register("email", { required: "An email is required.", })} />
+                    <Input style={{ maxWidth: '50%' }} type="text" placeholder="email" {...register("email", { required: "An email is required.", })} />
                     {errors.email && <p>{errors.email.message}</p>}
                 </Column>
 
                 <Column isThreeFifths isFlex isAlignItemsCenter isJustifyContentCenter isFlexDirectionColumn>
                     <Label>Passord</Label>
-                    <input type="text" placeholder="password" {...register("password", { required: "A password is required.", })} />
+                    <Input style={{ maxWidth: '50%' }} type="text" placeholder="password" {...register("password", { required: "A password is required.", })} />
                     {errors.email && <p>{errors.email.message}</p>}
                 </Column>
 

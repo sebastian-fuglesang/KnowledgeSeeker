@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from "../contexts/AuthContex";
 import { Link, useHistory } from 'react-router-dom';
-import { Columns, Column, Button, Label } from 'trunx';
+import { Columns, Column, Button, Label, Input } from 'trunx';
 
 interface RegisterProps {
     username: string;
@@ -34,25 +34,24 @@ export default function KsRegister() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Column>
-                    <Label>Username</Label>
-                    <input type="text" placeholder="username" {...register("username", { required: "An email is required.", })} />
+                    <Label isSize4 hasTextWhite>Brukernavn</Label>
+                    <Input type="text" placeholder="Brukernavn" {...register("username", { required: "An email is required.", })} />
                     {errors.username && <p>{errors.username.message}</p>}
                 </Column>
 
                 <Column>
-                    <Label>Password</Label>
-                    <input type="text" placeholder="password" {...register("password", { required: "A password is required.", })} />
+                    <Label isSize4 hasTextWhite>Passord</Label>
+                    <Input type="text" placeholder="Passord" {...register("password", { required: "A password is required.", })} />
                     {errors.password && <p>{errors.password.message}</p>}
 
                 </Column>
 
                 <Column>
-                    <Label>Register User</Label>
-                    <Button type="submit" isLink isNormal>Register User</Button>
+                    <Button value="Registrer bruker" type="submit" isLink isNormal>Registrer Bruker</Button>
                 </Column>
 
                 <Column>
-                    <p>Already have a user? <Link to="/LoginPage">Log In </Link> </p>
+                    <p>Har du allerede en bruker? <Link to="/LoginPage">Logg Inn </Link> </p>
 
                 </Column>
 

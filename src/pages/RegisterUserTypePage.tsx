@@ -17,13 +17,13 @@ export default function RegisterUserTypePage() {
 
     return (
 
-        <Columns style={{}} isFlex isFlexDirectionRow isAlignContentCenter isJustifyContentCenter>
+        <Columns style={{}} isFlex isFlexDirectionRow isAlignItemsCenter isJustifyContentCenter p6 m6>
 
-            <Column isTwoFifths isCentered>
+            <Column isTwoFifths isFlex isFlexDirectionRow isAlignItemsCenter isJustifyContentCenter >
                 <Button isLink isLarge onClick={handleCompanyRepresentant}>Jeg er en Bedriftsrepresentant</Button>
             </Column>
 
-            <Column isTwoFifths>
+            <Column isTwoFifths isFlex isFlexDirectionRow isAlignItemsCenter isJustifyContentCenter>
                 <Button isLink isLarge onClick={handleStudent}>Jeg er en Student</Button>
             </Column>
 
