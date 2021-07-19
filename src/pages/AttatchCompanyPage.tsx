@@ -2,15 +2,24 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { companiesDB } from '../utils/firebase';
 import { Columns, Column, Label, Button, Input } from 'trunx';
+import { useState } from 'react';
 
 interface AttatchCompanyProps {
     companyName: string;
 }
 
+interface CompanyData {
+    name: string;
+    employees: number;
+}
+
+let matchingCompanies: { name: string, employees: number }[] = [];
+
 export default function AttatchCompanyPage() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<AttatchCompanyProps>();
     const history = useHistory();
+    const [matchingCompanies, setMatchingCompanies] = useState<CompanyData[]>([]);
 
     const handleAttach = (data: any): void => {
         const isACompany = companiesDB
@@ -30,27 +39,18 @@ export default function AttatchCompanyPage() {
         history.push("/CreateNewCompanyPage");
     }
 
-    let matchingCompanies: { name: string, employees: number }[] = [];
-
     const handleSearchForCompany = (event: any) => {
-
-
+        setMatchingCompanies([]);
         companiesDB.where('companyName', '==', event.companyName).get().then(company => {
             company.forEach(doc => {
                 var company: { name: string, employees: number } = { name: '', employees: 0 };
                 company.name = doc.data().companyName;
                 company.employees = doc.data().numberOfEmployees;
-                matchingCompanies.push(company);
+                setMatchingCompanies(oldArray => [...oldArray, company])
             })
         }).catch(e => { console.log(e) });
         console.log(matchingCompanies);
     }
-
-    {/*
-    const handleCompanyData = (matchingCompanies: { name: string; employees: number }) => {
-
-    }
-*/}
 
     return (
 
@@ -76,18 +76,11 @@ export default function AttatchCompanyPage() {
                 </Column>
 
                 <Column>
-                    {matchingCompanies.map((company: { name: string; employees: number }, i: number) => {
-                        <>
-                            <p>{company.name}</p>
-                            <p>{company.employees}</p>
-                        </>
-                    })
-
-                    }
-
+                    {matchingCompanies.map(company => {
+                        return (
+                            <p>{company.name}</p>)
+                    })}
                 </Column>
-
-
 
             </form>
         </Columns>

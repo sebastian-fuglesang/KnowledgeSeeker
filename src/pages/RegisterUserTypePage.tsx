@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Columns, Column, Container } from 'trunx';
-import "./RegisterUserTypePage.scss";
-
+import { Button, Columns, Column } from 'trunx';
 
 
 export default function RegisterUserTypePage() {
